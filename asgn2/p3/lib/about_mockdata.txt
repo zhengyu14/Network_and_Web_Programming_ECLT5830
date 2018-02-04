@@ -1,0 +1,13 @@
+The data in mockdata.json are randomly generated from
+
+https://www.mockaroo.com/#
+
+with the following specification
+
+id: Row Number
+title: Product (Grocery)
+origin: Country
+price: Number (min:1, max:100, decimals: 1)
+
+# of rows: 30
+Format: JSON
