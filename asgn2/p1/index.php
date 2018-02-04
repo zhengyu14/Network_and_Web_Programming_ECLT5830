@@ -17,11 +17,11 @@
   $agent = $_SERVER['HTTP_USER_AGENT'];
   $file = fopen("info.txt","w") or die("Unable to open file!");
 
-  echo $agent;
+  //echo $agent;
 
   // Get OS info
   if ( strpos($agent, "Macintosh") ) {
-    $os = "Mac\n";
+    $os = "Mac\r\n";
   }
 
   // Output browser
@@ -33,7 +33,8 @@
   fwrite($file, $os);
   fwrite($file, $browser);
 
-  echo file_get_contents("../test.txt");
+  echo "Following contents are output into info.txt: ", "<br>";
+  echo file_get_contents("info.txt");
 
   fclose($file);
 
