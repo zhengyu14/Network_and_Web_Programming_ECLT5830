@@ -25,7 +25,7 @@
   */
 
   // Solution goes here:
-  $item = [];
+  $item = array();
 
   if (isset($_GET['id'])) {
     for ($i = 0; $i < count($mockDb) ; $i++) {
@@ -37,10 +37,10 @@
         echo "<b>Price: </b><br>" . $item['price'] . "<br>";
 ?>
 
-<form method="post" action=<?php echo "add_item.php?id=".$item['id'] ?>>
+<form method="post" action="add_item.php?id=<?php echo $item['id']?>">
   <br><b>Quantity: </b><br>
   <input type="number" name="quantity" /><br>
-  <br><input href="add_item.php" type="submit" name="submit" value="Add to Cart"/>
+  <br><input href="add_item.php" type="submit" name="addToCart" value="Add to Cart"/>
 </form>
 
 <?php
@@ -48,6 +48,8 @@
       };
 
     }
+  } else {
+    echo '<p style = "color:red"> Invalid Item! </p>';
   }
   // End of solution
 
