@@ -17,5 +17,23 @@
   content of a file. Here, output means sending the data to the response body.
 */
 
+  // Sollution goes here:
+  $imgURL = '';
+
+  if (isset($_GET['d']) && isset($_GET['type'])) {
+
+    if ($_GET['type'] == 1) {
+      $imgURL = "img/".$_GET['d']."CB.jpg";
+    } elseif ($_GET['type'] == 2) {
+      $imgURL = "img/".$_GET['d']."ODB.jpg";
+    } elseif ($_GET['type'] == 3) {
+      $imgURL = "img/".$_GET['d']."UNO.jpg";
+    }
+
+    header("Content-Type: ".mime_content_type($imgURL));
+    readfile($imgURL);
+
+  }
+  // End of solution
 
 ?>

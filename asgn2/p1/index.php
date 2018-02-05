@@ -11,33 +11,38 @@
   */
 
   // Solution goes here
+  header("Content-Type: text/plain");
+
   $os = '';
   $browser = '';
   $info = '';
   $agent = $_SERVER['HTTP_USER_AGENT'];
   $file = fopen("info.txt","w") or die("Unable to open file!");
 
-  //echo $agent;
-
-  // Get OS info
+  // Get OS info.
   if ( strpos($agent, "Macintosh") ) {
-    $os = "Mac\r\n";
+    $os = "MacOS\r\n";
+  } elseif ( strpos($agent, "Windows") ) {
+    $os = "Windows\r\n";
+  } else {
+    $os = "Other\r\n";
   }
 
-  // Output browser
-  if ( strpos($agent, "Chrome") ) {
+  // Get browser info.
+  if ( strpos($agent, "Edge") ) {
+    $browser = "Microsoft Edge";
+  } elseif ( strpos($agent, "Chrome") ) {
     $browser = "Chrome";
+  } elseif ( strpos($agent, "Safari") ) {
+    $browser = "Safari";
+  } elseif ( strpos($agent, "Firefox") ) {
+    $browser = "Firefox";
+  } else {
+    $browser = "Other";
   }
 
-  // Write plain text file
-  fwrite($file, $os);
-  fwrite($file, $browser);
-
-  echo "Following contents are output into info.txt: ", "<br>";
-  echo file_get_contents("info.txt");
-
-  fclose($file);
-
+  $info = $os . $browser;
+  echo $info;
   // End of solution
 
 ?>

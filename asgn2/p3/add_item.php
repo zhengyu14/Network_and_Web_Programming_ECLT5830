@@ -13,6 +13,27 @@
            Update the quanity of the item in the shopping cart
 
   */
+
+  // Sollution goes here:
+  if (isset($_POST['submit'])) {
+    echo $_GET['id'];
+    echo $_POST['quantity'];
+
+    if (isset($_GET['id'])) {
+      for ($i = 0; $i < count($mockDb) ; $i++) {
+        $item = $mockDb[$i];
+
+        if ($_GET['id'] == $item['id']) {
+
+          break;
+        } else {
+
+        }
+      }
+    }
+  }
+  // End of solution
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,6 +48,11 @@
   TODO: Output a message to indicate if an item has been successfully
         added to the cart.
 */
+
+// Solution goes here:
+
+// End of solution
+
 ?>
 
 </body>

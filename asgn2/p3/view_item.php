@@ -23,6 +23,34 @@
       d. A form that allows the user to specify and submit the quantity of the
          current item to be added to the shopping cart.
   */
+
+  // Solution goes here:
+  $item = [];
+
+  if (isset($_GET['id'])) {
+    for ($i = 0; $i < count($mockDb) ; $i++) {
+      $item = $mockDb[$i];
+
+      if ($_GET['id'] == $item['id']) {
+        echo "<b>Title: </b><br>" . $item['title'] . "<br>";
+        echo "<b>Origin: </b><br>" . $item['origin'] . "<br>";
+        echo "<b>Price: </b><br>" . $item['price'] . "<br>";
+?>
+
+<form method="post" action=<?php echo "add_item.php?id=".$item['id'] ?>>
+  <br><b>Quantity: </b><br>
+  <input type="number" name="quantity" /><br>
+  <br><input href="add_item.php" type="submit" name="submit" value="Add to Cart"/>
+</form>
+
+<?php
+        break;
+      };
+
+    }
+  }
+  // End of solution
+
 ?>
 
 
