@@ -15,6 +15,8 @@
   */
 
   // Sollution goes here:
+
+  // 1. Start session and check session variable 'cart'
   session_start();
 
   if (isset($_SESSION['cart'])) {
@@ -24,45 +26,67 @@
     $_SESSION['cart'] = $cart;
   }
 
-  if (isset($_POST['addToCart'])) {
+  // 2. Add to cart
+  $isUpdated = false;
+  $isAdded = false;
+  $isInDB = false;
 
-    if ($_POST['quantity'] < 0) {
-      echo '<p style = "color:red"> Invalid Quantity! </p>';
-    }
+  if (isset($_GET['id'])) {
 
-    if (isset($_GET['id'])) {
+     if (isset($_POST['addToCart'])) {
+
+      // 2.1 Validate item ID
       for ($i = 0; $i < count($mockDb) ; $i++) {
         $item = $mockDb[$i];
-        $updatedFlag = false;
-        $addedFlag = true;
 
         if ($_GET['id'] == $item['id']) {
 
-          for ($j = 0; $j < count($cart); $j++) {
-            if ($cart[$j]['id'] == $item['id']) {
-              // Update an existed entry
-              $cart[$j]['quantity'] = $cart[$j]['quantity'] + $_POST['quantity'];
-              $_SESSION['cart'] = $cart;
-              $updatedFlag = true;
-              break;
-            }
-          }
+          $isInDB = true;
+          // 2.1.1 Validate quantity
+          if ($_POST['quantity'] <= 0 || $_POST['quantity'] == null) {
+            echo '<p style = "color:red"> Invalid Quantity! </p>';
+?>
+<form method="post" action="view_item.php?id=<?php echo $_GET['id']?>">
+  <input type="submit" name="backToViewItem" value="Back"/>
+</form>
+<?php
+          } else {
+            // 2.2 Check if the item is already existed in cart
+            for ($j = 0; $j < count($cart); $j++) {
 
-          if ($updatedFlag == false) {
-            // Add to cart as new entry
-            $newEntry = array("id" => $item['id'], "title" => $item['title'], "quantity" => $_POST['quantity']);
-            array_push($cart,$newEntry);
-            $_SESSION['cart'] = $cart;
-            $addedFlag = true;
+              if ($cart[$j]['id'] == $item['id']) {
+                // 2.2.1 Update item to an existed entry
+                $cart[$j]['quantity'] = $cart[$j]['quantity'] + $_POST['quantity'];
+                $_SESSION['cart'] = $cart;
+                $isUpdated = true;
+                break;
+              }
+
+            }
+
+            if ($isUpdated == false) {
+              // 2.2.2 Add item to cart as new entry
+              $newEntry = array("id" => $item['id'], "title" => $item['title'], "quantity" => $_POST['quantity']);
+              array_push($cart,$newEntry);
+              $_SESSION['cart'] = $cart;
+              $isAdded = true;
+            }
           }
 
           break;
         }
+
+      }
+
+      if ($isInDB == false) {
+        echo '<p style = "color:red"> Invalid Item! </p>';
       }
     } else {
       echo '<p style = "color:red"> Invalid Item! </p>';
     }
   }
+
+
   // End of solution
 
 ?>
@@ -81,8 +105,10 @@
 */
 
   // Solution goes here:
-  if ($addedFlag == true) {
-    echo '<p style = "color:red"> Item added successfully! </p>';
+  if ($isAdded == true) {
+    echo '<p style = "color:green"> Item added successfully, please view your shopping cart. </p>';
+  } elseif ($isUpdated == true) {
+    echo '<p style = "color:green"> Item in cart updated successfully, please view your shopping cart. </p>';
   }
   // End of solution
 

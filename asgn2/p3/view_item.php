@@ -32,6 +32,7 @@
       $item = $mockDb[$i];
 
       if ($_GET['id'] == $item['id']) {
+        echo "<h3>Item Detail: </h3>";
         echo "<b>Title: </b><br>" . $item['title'] . "<br>";
         echo "<b>Origin: </b><br>" . $item['origin'] . "<br>";
         echo "<b>Price: </b><br>" . $item['price'] . "<br>";
