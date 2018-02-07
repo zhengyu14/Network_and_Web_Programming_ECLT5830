@@ -17,13 +17,40 @@
   // TODO: Show the content of the shopping cart (in any format) here.
 
   // Solution goes here:
-  echo "<h3>Shopping Cart: </h3>";
-  if (isset($_SESSION['cart'])) {
-    $cart = $_SESSION['cart'];
-  } else {
-    $cart = array();
+
+  $cart = array();
+
+  // 1. Process session and cookies
+  if (!isset($_COOKIE['sessionID']) || $_COOKIE['sessionID'] == null) {
+    setcookie('sessionID', session_id(), time() + 300);
+    $_SESSION['creationTime'] = time();
     $_SESSION['cart'] = $cart;
+    echo '<p style = "color:red"> Session expired. </p>';
+  } else {
+    // 1.1 Retrive session ID from cookies
+    $sessionID = $_COOKIE['sessionID'];
+
+    if ($sessionID !== session_id() || (time() - $_SESSION['creationTime']) > 300) { // Session ID not existed or expired
+      // 1.1.1 If session ID is expired, delete cart
+      if ((time() - $_SESSION['creationTime']) > 300) {
+        unset($_SESSION['cart']);
+      }
+      // 1.1.2 Create creation time and cart into session
+        $_SESSION['creationTime'] = time();
+        $_SESSION['cart'] = $cart;
+        echo '<p style = "color:red"> Session expired. </p>';
+    } else {
+      // 1.1.2 Restore Cart
+      if (isset($_SESSION['cart'])) {
+        $cart = $_SESSION['cart'];
+      } else {
+        $_SESSION['cart'] = $cart;
+      }
+    }
+
   }
+
+  echo "<h3>Shopping Cart: </h3>";
 
   if (count($cart) == 0) {
     echo "Your cart is empty.";

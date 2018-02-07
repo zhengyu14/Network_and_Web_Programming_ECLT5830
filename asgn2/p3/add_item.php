@@ -21,9 +21,10 @@
   // 1. Process session and cookies
   if (!isset($_COOKIE['sessionID']) || $_COOKIE['sessionID'] == null) {
     setcookie('sessionID', session_id(), time() + 300);
-  }
-
-  if (isset($_SESSION['creationTime']) && isset($_SESSION['creationTime'])) {
+    $_SESSION['creationTime'] = time();
+    $_SESSION['cart'] = $cart;
+    echo '<p style = "color:red"> Session expired. </p>';
+  } else {
     // 1.1 Retrive session ID from cookies
     $sessionID = $_COOKIE['sessionID'];
 
@@ -34,11 +35,15 @@
       }
       // 1.1.2 Create creation time and cart into session
         $_SESSION['creationTime'] = time();
-        $cart = array();
         $_SESSION['cart'] = $cart;
+        echo '<p style = "color:red"> Session expired. </p>';
     } else {
       // 1.1.2 Restore Cart
-      $cart = $_SESSION['cart'];
+      if (isset($_SESSION['cart'])) {
+        $cart = $_SESSION['cart'];
+      } else {
+        $_SESSION['cart'] = $cart;
+      }
     }
 
   }
