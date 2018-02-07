@@ -15,31 +15,32 @@
   */
 
   // Sollution goes here:
+  session_start();
+  $cart = array();
 
-  // 1. Set cookie and start a session
-  // 1.1 Set the cookie with session ID and expiration time of 5 mins (300 secs)
+  // 1. Process session and cookies
+  if (!isset($_COOKIE['sessionID']) || $_COOKIE['sessionID'] == null) {
+    setcookie('sessionID', session_id(), time() + 300);
+  }
 
-
-  if (isset($_COOKIE['sessionID'])) {
+  if (isset($_SESSION['creationTime']) && isset($_SESSION['creationTime'])) {
+    // 1.1 Retrive session ID from cookies
     $sessionID = $_COOKIE['sessionID'];
 
-  }
-  // 1.2 Validate session
-  if (isset($_SESSION['creationTime']) && $_SESSION['creationTime'] < ) {
-    # code...
-  }
-  session_start();
+    if ($sessionID !== session_id() || (time() - $_SESSION['creationTime']) > 300) { // Session ID not existed or expired
+      // 1.1.1 If session ID is expired, delete cart
+      if ((time() - $_SESSION['creationTime']) > 300) {
+        unset($_SESSION['cart']);
+      }
+      // 1.1.2 Create creation time and cart into session
+        $_SESSION['creationTime'] = time();
+        $cart = array();
+        $_SESSION['cart'] = $cart;
+    } else {
+      // 1.1.2 Restore Cart
+      $cart = $_SESSION['cart'];
+    }
 
-  // 1.3 Check session variable 'cart' and 'creationTime'
-  if (isset($_SESSION['cart'])) {
-    $cart = $_SESSION['cart'];
-  } else {
-    $cart = array();
-    $_SESSION['cart'] = $cart;
-  }
-
-  if (!isset($_SESSION['creationTime'])) {
-    $_SESSION['creationTime'] = time();
   }
 
   // 2. Add to cart

@@ -2,8 +2,6 @@
   // Include the data to be used in this assignment
   // Do not remove this line.
   include('lib/items.php');
-  session_start();
-  setcookie("sessionID", session_id(), time()+10);
 ?>
 <!DOCTYPE html>
 <head>
