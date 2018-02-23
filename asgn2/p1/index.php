@@ -17,7 +17,6 @@
   $browser = '';
   $info = '';
   $agent = $_SERVER['HTTP_USER_AGENT'];
-  $file = fopen("info.txt","w") or die("Unable to open file!");
 
   // Get OS info.
   if ( strpos($agent, "Macintosh") ) {

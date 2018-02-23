@@ -28,11 +28,11 @@
   $item = array();
   $isInDB = false;
 
-  if (isset($_GET['id'])) {
-    for ($i = 0; $i < count($mockDb) ; $i++) {
+  if ( isset($_GET['id']) ) {
+    for ( $i = 0; $i < count($mockDb) ; $i++ ) {
       $item = $mockDb[$i];
 
-      if ($_GET['id'] == $item['id']) {
+      if ( $_GET['id'] == $item['id'] ) {
         $isInDB = true;
         echo "<h3>Item Detail: </h3>";
         echo "<b>Title: </b><br>" . $item['title'] . "<br>";
@@ -52,7 +52,7 @@
 
     }
 
-    if ($isInDB == false) {
+    if ( $isInDB == false ) {
       echo '<p style = "color:red"> Invalid Item! </p>';
     }
   } else {
