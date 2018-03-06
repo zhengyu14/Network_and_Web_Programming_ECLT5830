@@ -3,8 +3,14 @@
   include_once('top.php');
  ?>
 
-<!-- Solutions goes here: -->
-<div class="container">
+<!-- Solution goes here: -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <img src=../img/6.jpg>
+    </div>
+  </div>
+
 <?php
   // Read student ID, name from database
   $sql = "SELECT user_id, first_name, last_name FROM users";
@@ -13,11 +19,16 @@
   // Print strudents information
   if ( $studentInfo->num_rows > 0  ) {
     while( $row = $studentInfo->fetch_assoc() ) {
-      echo '<div class="row">';
-      echo '<img src=../img/' . $row['user_id'] . '.jpg />';
-      echo '<div class="col"> Student Name: ' . $row['first_name'] . ' ' . $row['last_name'] . '</div>';
-      echo '<div class="col"> Student ID: ' . $row['user_id'] . '</div>';
-      echo "</div>";
+?>
+  <div class="row">
+    <div class="col-xs-6 student_name">
+      <?php echo $row['first_name'] . " " . $row['last_name']; ?>
+    </div>
+    <div class="col-xs-6 student_id">
+      <?php echo $row['user_id']; ?>
+    </div>
+  </div>
+<?php
     }
   } else {
     echo "No result.";
