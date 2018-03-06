@@ -9,6 +9,7 @@
     visibility: hidden;
     display: block
   }
+
 }
 
 @media (min-width: 640px) {
@@ -24,4 +25,8 @@
   .student_id {
     text-align: center
   }
+}
+
+.col-xs-6 {
+  text-align: center
 }

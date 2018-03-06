@@ -13,12 +13,12 @@
 
 <?php
   // Read student ID, name from database
-  $sql = "SELECT user_id, first_name, last_name FROM users";
-  $studentInfo = mysqli_query($db, $sql);
+  $query = "SELECT user_id, first_name, last_name FROM users";
+  $result = @mysqli_query($db, $query);
 
   // Print strudents information
-  if ( $studentInfo->num_rows > 0  ) {
-    while( $row = $studentInfo->fetch_assoc() ) {
+  if ( $result->num_rows > 0  ) {
+    while( $row = $result->fetch_assoc() ) {
 ?>
   <div class="row">
     <div class="col-xs-6 student_name">
@@ -30,6 +30,7 @@
   </div>
 <?php
     }
+    mysqli_free_result($result);
   } else {
     echo "No result.";
   }
