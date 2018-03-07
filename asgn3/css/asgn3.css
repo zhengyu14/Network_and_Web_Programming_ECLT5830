@@ -2,18 +2,20 @@
   Place your CSS here
 */
 @media (max-width: 640px) {
-  img {
+  .index_img {
     width: 100%
   }
   .student_id {
     visibility: hidden;
     display: block
   }
-
+  .student_name {
+    text-align: center
+  }
 }
 
 @media (min-width: 640px) {
-  img {
+  .index_img {
     width: 100px;
     position: fixed;
     bottom: 20px;
@@ -28,5 +30,52 @@
 }
 
 .col-xs-6 {
+  font-family: arial;
   text-align: center
+}
+
+.item_list_title {
+  font-family: arial;
+  text-align: center
+}
+
+.item_list_price {
+  font-family: arial;
+  text-align: center
+}
+
+.item_detail_header {
+  background-color: AliceBlue
+}
+
+.item_detail_title {
+  font-family: arial;
+  text-align: left
+}
+
+.item_detail_subtitle {
+  font-family: arial;
+  color: grey;
+  font-size: 10px;
+}
+
+.item_detail_img {
+  height: 50px;
+  width: 50px
+}
+
+.item_detail_info {
+  font-family: arial;
+  font-size: 12px;
+}
+
+.comment_subtitle {
+  font-family: arial;
+  color: grey;
+  font-size: 10px;
+}
+
+.comment_message {
+  font-family: arial;
+  font-size: 12px;
 }

@@ -6,8 +6,16 @@
 <!-- Solution goes here: -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col">
-      <img src=../img/6.jpg>
+    <div class="col index_img">
+      <img class="index_img" src=../img/6.jpg>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 student_name">
+      <strong><u>Name</u></strong>
+    </div>
+    <div class="col-xs-6 student_id">
+      <strong><u>ID</u></strong>
     </div>
   </div>
 
