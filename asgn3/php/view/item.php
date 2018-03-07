@@ -59,7 +59,7 @@ if ( isset($_GET['id']) ) {
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <img class="img-circle item_detail_img" src=../img/<?php echo  $img; ?>>
+      <img class="item_detail_img" src=../img/<?php echo  $img; ?>>
     </div>
   </div>
   <div class="row">
@@ -74,6 +74,7 @@ if ( isset($_GET['id']) ) {
   </div>
 </div>
 <br>
+<div class="item_comments">
 <?php
     }
     if ( $resultComments->num_rows > 0  ) {
@@ -84,11 +85,10 @@ if ( isset($_GET['id']) ) {
         $item_id = $row['item_id'];
         $msg = $row['msg'];
         $updated_on = $row['updated_on'];
-        $full_name = $row['first_name'] . $row['last_name'];
+        $full_name = $row['first_name'] . " " . $row['last_name'];
         $email = $row['email'];
 ?>
 <!-- Comments -->
-<div class="item_comments">
   <h5><?php echo $full_name; ?><small> | <a href="mailto:#"><?php echo $email; ?></a></small></h3>
   <div class="row">
     <div class="col-xs-12 comment_subtitle">
@@ -100,7 +100,6 @@ if ( isset($_GET['id']) ) {
       <p><?php echo $msg; ?></p>
     </div>
   </div>
-</div>
 <hr>
 <?php
       }
@@ -116,6 +115,7 @@ if ( isset($_GET['id']) ) {
   echo "<br>Item not found.<br>";
 }
 ?>
+</div>
 </div> <!-- container-fluid -->
 <!-- End of solution -->
 
