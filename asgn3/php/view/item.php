@@ -44,24 +44,32 @@ if ( isset($_GET['id']) ) {
       $added_on = $row['added_on'];
       $img = $row['img'];
 ?>
-
 <!-- Header: Item deails -->
 <div class="item_detail_header">
   <div class="row">
     <div class="col-xs-12 item_detail_title">
-      <h3><?php echo $title; ?><small> | <?php echo $item_id; ?></small></h3>
+      <h3><?php echo $title; ?><small>  <?php echo $item_id; ?></small></h3>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 item_detail_subtitle">
-      <p><strong>Added on:</strong> <?php echo $added_on; ?></p>
+      <p>Added on: <?php echo $added_on; ?></p>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-1">
       <img class="item_detail_img" src=../img/<?php echo  $img; ?>>
     </div>
+    <div class="col-xs-10 item_detail_info">
+      <div class="row">
+        <p>Price: <strong><?php echo $price; ?></strong></p>
+      </div>
+      <div class="row">
+        <p>Description: <strong><?php echo $description; ?></strong></p>
+      </div>
+    </div>
   </div>
+<!--
   <div class="row">
     <div class="col-xs-12 item_detail_info">
       <p><strong>Description: </strong><?php echo $description; ?></p>
@@ -72,6 +80,7 @@ if ( isset($_GET['id']) ) {
       <p><strong>Price: </strong><?php echo $price; ?></p>
     </div>
   </div>
+-->
 </div>
 <br>
 <div class="item_comments">

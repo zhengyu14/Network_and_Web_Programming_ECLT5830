@@ -55,23 +55,24 @@
 
 .item_detail_subtitle {
   font-family: arial;
-  color: grey;
+  color: #5E696E;
   font-size: 10px;
 }
 
 .item_detail_img {
-  height: 50px;
-  width: 50px
+  height: 80px;
+  width: 80px
 }
 
 .item_detail_info {
   font-family: arial;
   font-size: 12px;
+  text-align: left
 }
 
 .comment_subtitle {
   font-family: arial;
-  color: grey;
+  color: #5E696E;
   font-size: 10px;
 }
 
