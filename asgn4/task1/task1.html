@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head><title>Task #1</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form>
+  <div>
+    <input name="title" placeholder="Title ..." value="">
+  </div>
+
+  <div>
+    <label for="fruit">Animal choice: </label>
+    <input type="radio" name="animal" value="wolf" checked> Wolf
+    <input type="radio" name="animal" value="lemur"> Lemur
+    <input type="radio" name="animal" value="cat"> Cat
+    <input type="radio" name="animal" value="raccoon"> Raccoon
+  </div>
+
+  <div>
+    <textarea name="description" rows="6" cols="60" value=""
+      placeholder="Description ..."></textarea>
+  </div>
+
+  <div>
+    <button>Save</button>
+    <button type="reset">Reset</button>
+  </div>
+</form>
+<hr>
+
+<div id=output>
+  <h3 id=title>Title ...</h3>
+  <div><img id=animal_img src="img/wolf.jpg" alt="wolf"></div>
+  <div id=description>Description ...</div>
+  </div>
+
+</div>
+
+</body>
+</html>
