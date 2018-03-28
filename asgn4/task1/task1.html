@@ -2,6 +2,63 @@
 <html>
 <head><title>Task #1</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Solution goes here: -->
+  <script>
+    window.onload = function() {
+      var output_title = document.querySelector('#title');
+      var output_desc = document.querySelector('#description');
+      var output_animal_img = document.querySelector('#animal_img');
+      var animals = document.getElementsByName('animal');
+      var save_button = document.getElementsByTagName('button')[0];
+      var reset_button = document.getElementsByTagName('button')[1];
+
+      // a) update title and description
+      window.oninput = function() {
+        output_title.innerHTML = document.getElementsByName('title')[0].value;
+        output_desc.innerHTML = document.getElementsByName("description")[0].value;
+      }
+      // b) update image
+      window.onchange = function() {
+        for (var i = 0; i < animals.length; i++) {
+          if (animals[i].checked) {
+            output_animal_img.src = 'img/' + document.getElementsByName('animal')[i].value + '.jpg';
+          }
+        }
+      }
+      // c) save to local storage
+      save_button.onclick = function() {
+        if (typeof(Storage) !== "undefined") {
+          localStorage.setItem("title", document.getElementsByName('title')[0].value);
+          localStorage.setItem("description", document.getElementsByName('description')[0].value);
+          for (var i = 0; i < animals.length; i++) {
+            if (animals[i].checked) {
+              localStorage.setItem("img", document.getElementsByName('animal')[i].value);
+            }
+          }
+        } else {
+          localStorage.setItem("title", "No Web Storage support");
+          localStorage.setItem("description", "No Web Storage support");
+        }
+      }
+      // c) retrive from local storage
+      if (localStorage.getItem("title") != null) {
+        output_title.innerHTML = localStorage.getItem("title");
+      }
+      if (localStorage.getItem("description") != null) {
+        output_desc.innerHTML = localStorage.getItem("description");
+      }
+      if (localStorage.getItem("img") != null) {
+        output_animal_img.src = 'img/' + localStorage.getItem("img") + '.jpg';
+      }
+      // clean local storage (additional step)
+      reset_button.onclick = function() {
+        localStorage.removeItem("title");
+        localStorage.removeItem("description");
+        localStorage.removeItem("img");
+      }
+    }
+  </script>
+  <!-- End of solution -->
 </head>
 <body>
 
@@ -19,7 +76,7 @@
   </div>
 
   <div>
-    <textarea name="description" rows="6" cols="60" value=""
+    <textarea id="input_desc" name="description" rows="6" cols="60" value=""
       placeholder="Description ..."></textarea>
   </div>
 

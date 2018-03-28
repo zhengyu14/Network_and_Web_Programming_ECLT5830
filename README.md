@@ -11,3 +11,6 @@
 ### Assignment 3 (asgn3)
 * P1. Adapt page with bootstrap grid
 * P2 & P3. SQL query
+
+### Assignment 4 (asgn4)
+* P1. Manipulate DOM
