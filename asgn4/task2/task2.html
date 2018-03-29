@@ -15,10 +15,13 @@
           success: function(targets) {
             display_names(targets);
           },
-          error: function(target) {
-            console.log(target);
+          error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
           }
         });
+      } else {
+        var namelist = document.getElementsByTagName('ul')[0];
+        $(namelist).empty(); // clear previous results
       }
     });
   });
@@ -26,10 +29,16 @@
   function display_names(targets) {
     var namelist = document.getElementsByTagName('ul')[0];
     $(namelist).empty(); // clear previous results
-    for (var i = 1; i < targets.length; i++) {
-      var names = document.createElement("li");
-      names.appendChild(document.createTextNode(targets[i]));
-      namelist.appendChild(names);
+    if (targets.length === 1) {
+      var no_match = document.createElement("li");
+      no_match.appendChild(document.createTextNode("No match."));
+      namelist.appendChild(no_match);
+    } else {
+      for (var i = 1; i < targets.length; i++) {
+        var names = document.createElement("li");
+        names.appendChild(document.createTextNode(targets[i]));
+        namelist.appendChild(names);
+      }
     }
   };
 </script>
