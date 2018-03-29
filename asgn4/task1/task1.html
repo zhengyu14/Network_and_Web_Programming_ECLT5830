@@ -27,7 +27,7 @@
       }
       // c) save to local storage
       save_button.onclick = function() {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== "undefined") { // browser supports web storage
           localStorage.setItem("title", document.getElementsByName('title')[0].value);
           localStorage.setItem("description", document.getElementsByName('description')[0].value);
           for (var i = 0; i < animals.length; i++) {
@@ -35,7 +35,7 @@
               localStorage.setItem("img", document.getElementsByName('animal')[i].value);
             }
           }
-        } else {
+        } else { // browser does not support web storage
           localStorage.setItem("title", "No Web Storage support");
           localStorage.setItem("description", "No Web Storage support");
         }
@@ -50,7 +50,7 @@
       if (localStorage.getItem("img") != null) {
         output_animal_img.src = 'img/' + localStorage.getItem("img") + '.jpg';
       }
-      // clean local storage (additional step)
+      // clean local storage (additional step, not assignment requirement)
       reset_button.onclick = function() {
         localStorage.removeItem("title");
         localStorage.removeItem("description");

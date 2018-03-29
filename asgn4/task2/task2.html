@@ -2,7 +2,38 @@
 <html>
 <head><title>Task #2</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<!-- Solution goes here: -->
+<script>
+  // 1) send input value to getNames.php
+  $(document).ready(function(){
+    $("input").on('input', function() {
+      var prefix = $('#prefix').val();
+      if (prefix != '') {
+        $.ajax({
+          url: 'getNames.php',
+          data: {prefix: prefix},
+          success: function(targets) {
+            display_names(targets);
+          },
+          error: function(target) {
+            console.log(target);
+          }
+        });
+      }
+    });
+  });
+  // 3) disply results
+  function display_names(targets) {
+    var namelist = document.getElementsByTagName('ul')[0];
+    $(namelist).empty(); // clear previous results
+    for (var i = 1; i < targets.length; i++) {
+      var names = document.createElement("li");
+      names.appendChild(document.createTextNode(targets[i]));
+      namelist.appendChild(names);
+    }
+  };
+</script>
+<!-- End of solution -->
 <style>
 #output {
   color: rgb(255, 64, 64);
