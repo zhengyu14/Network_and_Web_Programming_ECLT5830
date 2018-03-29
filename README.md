@@ -14,3 +14,4 @@
 
 ### Assignment 4 (asgn4)
 * P1. Manipulate DOM
+* P2. JQuery and Ajax
