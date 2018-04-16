@@ -15,3 +15,6 @@
 ### Assignment 4 (asgn4)
 * P1. Manipulate DOM
 * P2. JQuery and Ajax
+
+### Assignment 5 (asgn5)
+* P1. Build a website using 000webhost
