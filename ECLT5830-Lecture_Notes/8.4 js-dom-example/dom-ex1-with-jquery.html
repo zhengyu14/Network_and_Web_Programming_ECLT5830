@@ -1,0 +1,44 @@
+<!--
+  This example is similar to the one found in "dom-ex1-with-js.html" except
+  that it uses jQuery instead of DOM APIs.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel=stylesheet href="dom-ex1.css"></link>
+</head>
+<body>
+
+
+<form id="myform">
+  <div><label for=numX>X</label><input id="numX" type="number"></div>
+  <div><label for=numY>Y</label><input id="numY" type="number"></div>
+  <div><button id="compute" type="button">Compute</button></div>
+</form>
+
+<output id="output">&nbsp;</output>
+
+</body>
+</html>
+
+<!-- The location of this element is not critical. It could also be placed inside
+the head element because the code inside $(document).ready() will only be
+executed after the document has been fully loaded. -->
+<script>
+
+// Only assign event handler after the document object is ready
+$(document).ready(function() {
+
+  $('#compute').on('click', function() {
+      // Immediately retrieve the value from the input elements
+      // (which is of type string) and convert it to number.
+      var x = $('#numX').val() - 0;
+      var y = $('#numY').val() - 0;
+
+      $('#output').html(x + ' + ' + y + ' = ' + (x + y));
+  });
+});
+
+</script>

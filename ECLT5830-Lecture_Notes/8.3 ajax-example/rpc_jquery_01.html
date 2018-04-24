@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RPC (with jQuery) Demo #1</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div>
+  User ID: <input id="userid" type="text">
+  <button id="updateScore">Show score</button>
+Note: Valid id's are 1-6.
+</div>
+
+<hr>
+
+<div id="output">
+</div>
+
+</body>
+</html>
+
+<script>
+
+function set_score(userid, score) {
+  // Score < 0 implies invalid user id.
+  if (score >= 0)
+    $('#output').html(
+      `The score of the user with id ${userid} is ${score}.`);
+  else
+    $('#output').html(`Cannot find the user with id ${userid}`);
+}
+
+$(document).ready(function() {
+  $('#updateScore').click(function() {
+    let userid = $('#userid').val();
+    if (userid == "")
+      return;
+
+    $.ajax({
+      url: 'rpc_01.php',
+      data: {id: userid},
+      success: function(score) {
+        set_score(userid, score);
+      },
+      error: function(xhr) {
+        // On error, show the content in the response body for debugging purpose
+        console.log(xhr.responseText);
+      }
+    });
+  });
+});
+
+</script>

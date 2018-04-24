@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CORS Test</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+  <button id="b1">Ajax to localhost</button> (Simple Request to without_cors.php)<br>
+  <button id="b2">Ajax to 127.0.0.1</button> (Simple Request to without_cors.php)<br>
+  <button id="b3">Ajax to 127.0.0.1</button> (Simple Request to with_cors.php)<br>
+
+  <button id="b4">Ajax to 127.0.0.1</button>
+    (Request with custom headers to with_cors.php)<br>
+
+  <button id="b5">Ajax to 127.0.0.1</button>
+    (Request with custom headers to preflight_cors.php)<br>
+  <p>
+    Please view the output in the JS console.
+  </p>
+</body>
+</html>
+
+<script>
+
+function sendAjax(url, customHeaders) {
+  customHeaders = customHeaders || {};
+
+  $.ajax({
+    url: url,
+    data: { param1: 11, param2: 13},
+    dataType: 'json',
+    headers: customHeaders,
+    success: function(result) {
+      console.log('success', result);
+    },
+    error: function(xhr) {
+      console.log(xhr);
+    }
+  });
+}
+
+$(document).ready(function () {
+  var path = 'http://127.0.0.1/cors_demo/';
+  var customHeaders = {'x-custom-header': 'To trigger preflight'};
+
+  $('#b1').on('click', function() {
+    sendAjax('without_cors.php');
+  });
+
+  $('#b2').on('click', function() {
+    sendAjax(path + 'without_cors.php');
+  });
+
+  $('#b3').on('click', function() {
+    sendAjax(path + 'with_cors.php');
+  });
+
+  $('#b4').on('click', function() {
+    sendAjax(path + 'with_cors.php', customHeaders);
+  });
+
+  $('#b5').on('click', function() {
+    sendAjax(path + 'preflight_cors.php', customHeaders);
+  });
+});
+
+</script>

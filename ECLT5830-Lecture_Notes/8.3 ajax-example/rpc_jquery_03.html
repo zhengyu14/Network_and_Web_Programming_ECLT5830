@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RPC (with jQuery) Demo #3</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div>
+This example retrieve an array of user data (ID, name, scores) from
+rpc_03.php. The returned value is an array of objects encoded in JSON format.
+<hr>
+</div>
+
+<h2>View of the retrieved data rendered in JavaScript</h2>
+<div id="output">
+</div>
+
+<hr>
+
+<h2>Response body</h2>
+<pre id="output2">
+</pre>
+
+</body>
+</html>
+
+<script>
+
+// A function to show the data in "users" as a table inside the element with the
+// specified ID.
+// elementId: ID of the element where the data is to be shown
+// users: An array containing the user objects to be shown
+function displayScores(users) {
+
+  let str =
+   `<table border="0">
+    <tr><th>User ID</th><th>Name</th><th>Score</th></tr>`;
+
+  for (let i = 0; i < users.length; i++) {
+    str +=
+    `<tr>
+      <td>${users[i]['id']}</td>
+      <td>${users[i]['name']}</td>
+      <td>${users[i]['score']}</td>
+    </tr>`;
+  }
+  str += '</table>';
+
+  $('#output').html(str);
+
+  // Schedule to call update_scores() in 5 seconds
+  setTimeout(function(){
+    update_scores();
+  },  5000);
+}
+
+// A function that retrieve user objects via Ajax from the server and call
+// displayScores() to show the retrieved data.
+function update_scores() {
+  $.ajax({
+    url: 'rpc_03.php',
+    dataType: 'json',
+    success: function(users, textStatus, xhr) {
+      // "users" should be an array of user objects
+      displayScores(users, 'output');
+
+      $('#output2').html(xhr.responseText);
+    },
+    error: function(xhr) {
+      console.log(xhr.responseText);
+    }
+  });
+}
+
+$(document).ready(function() {
+  update_scores();
+});
+
+</script>

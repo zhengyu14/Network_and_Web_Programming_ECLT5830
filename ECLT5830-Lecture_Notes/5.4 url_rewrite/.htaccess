@@ -1,0 +1,14 @@
+<IfModule rewrite_module>
+
+# Turn on the rewrite module
+RewriteEngine On
+
+# Specify the base URI for the substitution
+# In the following example, apply the rules to XXX if the RequestURI
+# is in the form url_rewrite/XXX.
+RewriteBase /url_rewrite/
+
+# Rewrite <base>/bar/* to <base>/index.php/*
+RewriteRule ^bar/(.*) index.php/$1
+
+</IfModule>

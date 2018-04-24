@@ -1,0 +1,44 @@
+<!--
+  This example uses native DOM APIs to manipulate the elements.
+  It assign an event handler to #mybutton so that whenever a user clicks the
+  button, the script will add the numbers in the input fields and show the
+  sum in the output element.
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<link rel=stylesheet href="dom-ex1.css"></link>
+
+<script>
+// Only assign event handler after the document object is ready
+window.onload = function() {
+
+  var mybutton = document.querySelector('#compute');
+  mybutton.onclick = function() {
+    // Immediately retrieve the value from the input elements
+    // (which is of type string) and convert it to number.
+    var x = document.querySelector('#numX').value - 0;
+    var y = document.querySelector('#numY').value - 0;
+
+    var out = document.querySelector('#output');
+    out.innerHTML = x + ' + ' + y + ' = ' + (x + y);
+  }
+};
+
+</script>
+
+</head>
+<body>
+
+
+<form id="myform">
+ <label>X <input id="numX" type="number"></label>
+ <label>Y <input id="numY" type="number"></label>
+ <button id="compute" type="button">Compute</button>
+</form>
+
+<output id="output"></output>
+
+</body>
+</html>

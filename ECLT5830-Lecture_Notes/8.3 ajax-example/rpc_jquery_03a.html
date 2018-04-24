@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RPC (with jQuery) Demo #3a</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div>
+This example is similar to Example #3 (rpc_jquery_03.html). It is modified
+to show that content in the same webpage
+can be updated independently with the data retrieved from
+the server asynchronously.
+<hr>
+</div>
+
+<h2>View (Updated every 5 seconds)</h2>
+<div id="output">
+</div>
+
+<hr>
+
+<h2>View (Updated every 3 seconds)</h2>
+<div id="output2">
+</div>
+
+</body>
+</html>
+
+<script>
+
+// A function to show the data in "users" as a table inside the element with the
+// specified ID.
+// elementId: ID of the element where the data is to be shown
+// users: An array containing the user objects to be shown
+function displayScores(users, elementId, timeout_duration) {
+  let theElement = $('#' + elementId);
+  if (theElement.length == 0) // if no such element
+    return;
+
+    let str =
+     `<table border="0">
+      <tr><th>User ID</th><th>Name</th><th>Score</th></tr>`;
+
+  for (let i = 0; i < users.length; i++) {
+    str +=
+    `<tr>
+      <td>${users[i]['id']}</td>
+      <td>${users[i]['name']}</td>
+      <td>${users[i]['score']}</td>
+    </tr>`;
+  }
+  str += '</table>';
+
+  theElement.html(str);
+
+  // Schedule to call update_scores() in timeout_duration seconds
+  setTimeout(function() {
+    update_scores(elementId, timeout_duration);
+
+  }, timeout_duration);
+}
+
+// A function that retrieves user objects via Ajax from the server and call
+// displayScores() to show the retrieved data in the specified element.
+function update_scores(elementId, timeout_duration) {
+  $.ajax({
+    url: 'rpc_03.php',
+    dataType: 'json',
+    success: function(users, textStatus, xhr) {
+      // "users" should be an array of user objects
+      displayScores(users, elementId, timeout_duration);
+    },
+    error: function(xhr) {
+      console.log(xhr.responseText);
+    }
+  });
+}
+
+$(document).ready(function() {
+  update_scores('output', 5000);
+  update_scores('output2', 3000);
+});
+
+</script>

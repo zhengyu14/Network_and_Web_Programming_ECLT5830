@@ -1,0 +1,15 @@
+  label { display: inline-block; width: 20px; padding: 0.2em; }
+  input
+
+  #output {
+    background: #ddddff;
+    width: 200px;
+    display: block;
+
+    /* To prevent the elements collapse to 0 height when there is no content
+       initially */
+    min-height: 1.25em;
+    line-height: 1.25;
+  }
+
+  button { margin: 5px; }

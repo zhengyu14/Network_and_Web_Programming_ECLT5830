@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RPC (with jQuery) Demo #4</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div>
+Name: <input id="name"><br>
+Phone #: <input id="phone"><br>
+email: <input id="email"><br>
+<button id="submit">Submit</button><br>
+</div>
+
+<hr>
+
+The following shows the object received and echoed by the server.
+<pre id="output">
+</pre>
+
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+
+  $('#submit').click(function() {
+    let record = {
+      name: $('#name').val(),
+      phone: $('#phone').val(),
+      email: $('#email').val()
+    };
+
+    console.log(record);
+
+    $.ajax({
+      type:   'POST',
+      url:    'rpc_04.php',
+      data:   JSON.stringify(record),   // Send data as JSON encoded string
+      contentType: 'application/json',
+      success: function(response, textStatus, xhr) {
+        $('#output').text(xhr.responseText);
+      },
+      error: function(xhr) {
+        // On error, show the content in the response body for debugging purpose
+        console.log(xhr.responseText);
+      }
+    });
+  });
+});
+
+</script>
